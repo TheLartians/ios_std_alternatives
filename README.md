@@ -1,3 +1,6 @@
+[![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20Mac%20+%20iOS/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
+[![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20Linux/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
+
 # ios_std_alternatives
 
 C++17 is awesome, however some features, such as `std::get` are [only available for recent iOS versions](https://stackoverflow.com/questions/52310835/xcode-10-call-to-unavailable-function-stdvisit/53868971).
