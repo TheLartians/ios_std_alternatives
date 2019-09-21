@@ -19,7 +19,7 @@ jobs:
 
     - name: configure and install
       run: |
-        cmake -H. -Bbuild -DCMAKE_INSTALL_PREFIX:PATH=/usr/local
+        cmake -H. -Bbuild
         sudo cmake --build build --target install
         
     - name: build and run tests
