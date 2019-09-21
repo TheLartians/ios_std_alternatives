@@ -1,0 +1,24 @@
+name: Test Linux
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: install updates
+      run: |
+        wget -O cmake.sh https://cmake.org/files/v3.14/cmake-3.14.0-Linux-x86_64.sh 
+        sudo sh cmake.sh --skip-license --exclude-subdir --prefix=/usr/local
+        export PATH=/usr/local/bin:$PATH
+        cmake --version
+
+    - name: build and run tests
+      run: |
+        cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+        cmake --build build -j8
+        ./build/tests/ios_std_alternatives_test

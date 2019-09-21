@@ -3,6 +3,7 @@
 #include <variant>
 #include <exception>
 #include <type_traits>
+#include <functional>
 
 namespace ios_std_alternatives {
 
