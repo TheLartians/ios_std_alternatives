@@ -15,7 +15,7 @@ namespace ios_std_alternatives {
 
 // --- Get ---
 
-  template <class T, typename ... Args> auto get(std::variant<Args...> & v){
+  template <class T, typename ... Args> auto &get(std::variant<Args...> & v){
     if (auto r = std::get_if<T>(&v)) {
       return *r;
     } else {
@@ -23,7 +23,7 @@ namespace ios_std_alternatives {
     }
   } 
 
-  template <class T, typename ... Args> auto get(const std::variant<Args...> & v){
+  template <class T, typename ... Args> auto &get(const std::variant<Args...> & v){
     if (auto r = std::get_if<T>(&v)) {
       return *r;
     } else {
@@ -31,7 +31,7 @@ namespace ios_std_alternatives {
     }
   } 
 
-  template <size_t T, typename ... Args> auto get(std::variant<Args...> & v){
+  template <size_t T, typename ... Args> auto &get(std::variant<Args...> & v){
     if (auto r = std::get_if<T>(&v)) {
       return *r;
     } else {
@@ -39,7 +39,7 @@ namespace ios_std_alternatives {
     }
   } 
 
-  template <size_t T, typename ... Args> auto get(const std::variant<Args...> & v){
+  template <size_t T, typename ... Args> auto &get(const std::variant<Args...> & v){
     if (auto r = std::get_if<T>(&v)) {
       return *r;
     } else {

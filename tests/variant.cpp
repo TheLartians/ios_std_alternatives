@@ -20,7 +20,8 @@ TEST_CASE("get") {
   SUBCASE("get string") {
     MyVariant x = "test";
 
-    CHECK(ios_std_alternatives::get<std::string>(x) == "test");
+    auto &ref = ios_std_alternatives::get<std::string>(x);
+    CHECK(ref == "test");
     CHECK(ios_std_alternatives::get<1>(x) == "test");
     
     CHECK_THROWS(ios_std_alternatives::get<int>(x));
@@ -36,7 +37,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit int") {
     MyVariant x = 42;
-    ios_std_alternatives::visit([&](auto && v){
+    ios_std_alternatives::visit([&](auto & v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, int>::value) {
         visited = true;
         CHECK(v == 42);
@@ -49,7 +50,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit string") {
     MyVariant x = "test";
-    ios_std_alternatives::visit([&](auto && v){
+    ios_std_alternatives::visit([&](auto & v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, std::string>::value) {
         visited = true;
         CHECK(v == "test");
