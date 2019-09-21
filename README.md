@@ -1,4 +1,5 @@
-[![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20Mac%20+%20iOS/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
+[![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20Mac/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
+[![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20iOS/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
 [![Actions Status](https://github.com/TheLartians/ios_std_alternatives/workflows/Test%20Linux/badge.svg)](https://github.com/TheLartians/ios_std_alternatives/actions)
 
 # ios_std_alternatives

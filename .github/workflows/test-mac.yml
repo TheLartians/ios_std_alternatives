@@ -1,0 +1,17 @@
+name: Test Mac
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: macOS-10.14
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: build and run tests
+      run: |
+        cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+        cmake --build build -j8
+        ./build/tests/ios_std_alternatives_test
