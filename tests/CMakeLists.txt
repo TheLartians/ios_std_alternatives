@@ -7,7 +7,7 @@ option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 # ---- Dependencies ----
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-  find_package(ios_std_alternatives_visit REQUIRED)
+  find_package(ios_std_alternatives REQUIRED)
 endif()
 
 include(../cmake/CPM.cmake)
@@ -40,6 +40,6 @@ ADD_TEST(ios_std_alternatives_test ios_std_alternatives_test)
 # ---- code coverage ----
 
 if (${ENABLE_TEST_COVERAGE})
-  set_target_properties(ios_std_alternatives_visit PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-O0 -g -fprofile-arcs -ftest-coverage --coverage")
-  target_link_options(ios_std_alternatives_visit PUBLIC "--coverage")
+  set_target_properties(ios_std_alternatives PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-O0 -g -fprofile-arcs -ftest-coverage --coverage")
+  target_link_options(ios_std_alternatives PUBLIC "--coverage")
 endif()
