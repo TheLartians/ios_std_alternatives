@@ -1,4 +1,4 @@
-name: CI
+name: Test Max / iOS
 
 on: [push]
 
