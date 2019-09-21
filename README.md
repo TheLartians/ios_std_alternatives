@@ -6,15 +6,15 @@ Note that it is currently only implemented for my personal use-cases and no guar
 
 ## Run tests
 
-```
+```bash
 cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
 cmake --build build -j8
 ./build/tests/ios_std_alternatives_test
 ```
 
-## Test if the tests compile for for iOS 9.0
+## Compile tests for iOS 9.0
 
-```
+```bash
 cmake -E env CXXFLAGS="-fno-aligned-allocation" cmake -H. -Bbuild-ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.0 "-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64;" -DCMAKE_IOS_INSTALL_COMBINED=YES -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
 cmake --build build-ios -j8
 ```
