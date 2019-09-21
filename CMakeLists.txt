@@ -15,7 +15,20 @@ project(ios_std_alternatives
   LANGUAGES CXX
 )
 
+# ---- Dependencies ----
+
+include(cmake/CPM.cmake)
+
+CPMAddPackage(
+  NAME mpark_variant
+  URL https://github.com/mpark/variant/archive/v1.4.0.zip
+  VERSION 1.4.0
+)
+
+# ---- Library ----
+
 add_library(ios_std_alternatives INTERFACE)
+target_link_libraries(ios_std_alternatives INTERFACE mpark_variant)
 
 target_include_directories(ios_std_alternatives
   INTERFACE 

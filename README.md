@@ -5,8 +5,7 @@
 # ios_std_alternatives
 
 C++17 is awesome, however some features, such as `std::get` are [only available for recent iOS versions](https://stackoverflow.com/questions/52310835/xcode-10-call-to-unavailable-function-stdvisit/53868971).
-This project adds some workaround methods to target older iOS versions.
-Note that it is currently only implemented for my personal use-cases and no guarantees are given to completeness or standard compliance.
+This project adds alternative implementations to broken iOS types.
 
 ## Run tests
 

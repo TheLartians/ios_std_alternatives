@@ -1,32 +1,33 @@
 #include <doctest/doctest.h>
 #include <ios_std_alternatives/variant.h>
+#include <variant>
 #include <string>
 
-using MyVariant = std::variant<int, std::string>;
+using MyVariant = isa::variant<int, std::string>;
 
 TEST_CASE("get") {
 
   SUBCASE("get int") {
     MyVariant x = 42;
 
-    CHECK(ios_std_alternatives::get<int>(x) == 42);
-    CHECK(ios_std_alternatives::get<0>(x) == 42);
+    CHECK(isa::get<int>(x) == 42);
+    CHECK(isa::get<0>(x) == 42);
     
-    CHECK_THROWS(ios_std_alternatives::get<std::string>(x));
-    CHECK_THROWS(ios_std_alternatives::get<1>(x));
-    CHECK_THROWS_AS(ios_std_alternatives::get<std::string>(x), ios_std_alternatives::bad_variant_access);
+    CHECK_THROWS(isa::get<std::string>(x));
+    CHECK_THROWS(isa::get<1>(x));
+    CHECK_THROWS_AS(isa::get<std::string>(x), mpark::bad_variant_access);
   }
 
   SUBCASE("get string") {
     MyVariant x = "test";
 
-    auto &ref = ios_std_alternatives::get<std::string>(x);
+    auto &ref = isa::get<std::string>(x);
     CHECK(ref == "test");
-    CHECK(ios_std_alternatives::get<1>(x) == "test");
+    CHECK(isa::get<1>(x) == "test");
     
-    CHECK_THROWS(ios_std_alternatives::get<int>(x));
-    CHECK_THROWS(ios_std_alternatives::get<0>(x));
-    CHECK_THROWS_AS(ios_std_alternatives::get<int>(x), ios_std_alternatives::bad_variant_access);
+    CHECK_THROWS(isa::get<int>(x));
+    CHECK_THROWS(isa::get<0>(x));
+    CHECK_THROWS_AS(isa::get<int>(x), mpark::bad_variant_access);
   }
 
 
@@ -37,7 +38,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit int") {
     MyVariant x = 42;
-    ios_std_alternatives::visit([&](auto & v){
+    isa::visit([&](auto & v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, int>::value) {
         visited = true;
         CHECK(v == 42);
@@ -50,7 +51,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit string") {
     MyVariant x = "test";
-    ios_std_alternatives::visit([&](auto & v){
+    isa::visit([&](auto & v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, std::string>::value) {
         visited = true;
         CHECK(v == "test");
@@ -59,6 +60,20 @@ TEST_CASE("visit") {
       }
     }, x);
     CHECK(visited);
+  }
+
+  SUBCASE("return reference") {
+    MyVariant x = 42;
+
+    int &y = isa::visit([](auto & v) -> int & {
+      if constexpr (std::is_same<typename std::decay<decltype(v)>::type, int>::value) {
+        return v;
+      } else {
+        throw "unexpected type";
+      }
+    }, x);  
+
+    CHECK(&y == &isa::get<int>(x));
   }
 
 }
