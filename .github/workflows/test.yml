@@ -9,6 +9,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    
     - name: build and run tests
       run: |
         cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
