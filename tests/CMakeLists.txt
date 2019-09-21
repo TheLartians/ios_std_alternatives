@@ -7,7 +7,7 @@ option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 # ---- Dependencies ----
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-  find_package(ios_std_visit REQUIRED)
+  find_package(ios_std_alternatives_visit REQUIRED)
 endif()
 
 include(../cmake/CPM.cmake)
@@ -21,25 +21,25 @@ CPMAddPackage(
 
 # ---- Create binary ----
 
-file(GLOB ios_std_test_sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB ios_std_alternatives_test_sources ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
 if (IOS)
-  add_library(ios_std_test ${ios_std_test_sources})
+  add_library(ios_std_alternatives_test ${ios_std_alternatives_test_sources})
 else()
-  add_executable(ios_std_test ${ios_std_test_sources})
+  add_executable(ios_std_alternatives_test ${ios_std_alternatives_test_sources})
 endif()
 
-target_link_libraries(ios_std_test doctest ios_std)
-set_target_properties(ios_std_test PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-Wall -pedantic -Wextra -Werror")
+target_link_libraries(ios_std_alternatives_test doctest ios_std_alternatives)
+set_target_properties(ios_std_alternatives_test PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-Wall -pedantic -Wextra -Werror")
 
 # ---- Add Tests to cmake ----
 
 ENABLE_TESTING()
-ADD_TEST(ios_std_test ios_std_test)
+ADD_TEST(ios_std_alternatives_test ios_std_alternatives_test)
 
 # ---- code coverage ----
 
 if (${ENABLE_TEST_COVERAGE})
-  set_target_properties(ios_std_visit PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-O0 -g -fprofile-arcs -ftest-coverage --coverage")
-  target_link_options(ios_std_visit PUBLIC "--coverage")
+  set_target_properties(ios_std_alternatives_visit PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-O0 -g -fprofile-arcs -ftest-coverage --coverage")
+  target_link_options(ios_std_alternatives_visit PUBLIC "--coverage")
 endif()

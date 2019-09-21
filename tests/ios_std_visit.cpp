@@ -1,5 +1,5 @@
 #include <doctest/doctest.h>
-#include <ios_std/variant.h>
+#include <ios_std_alternatives/variant.h>
 #include <string>
 
 TEST_CASE("visit") {
@@ -8,7 +8,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit int") {
     MyVariant x = 42;
-    ios_std::visit([&](auto && v){
+    ios_std_alternatives::visit([&](auto && v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, int>::value) {
         visited = true;
         CHECK(v == 42);
@@ -21,7 +21,7 @@ TEST_CASE("visit") {
 
   SUBCASE("visit string") {
     MyVariant x = "test";
-    ios_std::visit([&](auto && v){
+    ios_std_alternatives::visit([&](auto && v){
       if constexpr (std::is_same<typename std::decay<decltype(v)>::type, std::string>::value) {
         visited = true;
         CHECK(v == "test");

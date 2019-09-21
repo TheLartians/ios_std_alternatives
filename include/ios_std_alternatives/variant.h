@@ -4,7 +4,7 @@
 #include <exception>
 #include <type_traits>
 
-namespace ios_std {
+namespace ios_std_alternatives {
 
   class bad_variant_access: public std::exception {
     const char * what() const noexcept {
@@ -35,7 +35,7 @@ namespace ios_std {
         throw bad_variant_access();
       } else {
         if (v.index() == Idx) {
-          return std::invoke(std::forward<F>(f), ios_std::get<Idx>(std::forward<V>(v)));
+          return std::invoke(std::forward<F>(f), ios_std_alternatives::get<Idx>(std::forward<V>(v)));
         } else {
           return detail::visit<F,std::variant<Args...>, Idx+1, Args...>(std::forward<F>(f),v);
         }
