@@ -17,8 +17,13 @@ jobs:
         export PATH=/usr/local/bin:$PATH
         cmake --version
 
-    - name: build and run tests
+    - name: configure and install
       run: |
         cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
-        cmake --build build -j8
+        cmake --build build --target install
+        
+    - name: build and run tests
+      run: |
+        cmake -Htests -Bbuild/tests -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+        cmake --build build/tests -j8
         ./build/tests/ios_std_alternatives_test

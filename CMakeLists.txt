@@ -23,6 +23,50 @@ target_include_directories(ios_std_alternatives
     $<INSTALL_INTERFACE:include>
 )
 
+# ---- Install ----
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+  "${PROJECT_BINARY_DIR}/ios_std_alternativesConfigVersion.cmake"
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+install(
+  TARGETS ios_std_alternatives
+  EXPORT ios_std_alternativesTargets
+  LIBRARY DESTINATION lib COMPONENT Runtime
+  ARCHIVE DESTINATION lib COMPONENT Development
+  RUNTIME DESTINATION bin COMPONENT Runtime
+  PUBLIC_HEADER DESTINATION include COMPONENT Development
+  BUNDLE DESTINATION bin COMPONENT Runtime
+)
+
+configure_package_config_file(
+  "${PROJECT_SOURCE_DIR}/cmake/ios_std_alternativesConfig.cmake.in"
+  "${PROJECT_BINARY_DIR}/ios_std_alternativesConfig.cmake"
+  INSTALL_DESTINATION lib/cmake/ios_std_alternatives
+)
+
+install(
+  EXPORT ios_std_alternativesTargets 
+  DESTINATION lib/cmake/ios_std_alternatives
+)
+
+install(
+  FILES 
+    "${PROJECT_BINARY_DIR}/ios_std_alternativesConfigVersion.cmake"
+    "${PROJECT_BINARY_DIR}/ios_std_alternativesConfig.cmake"
+  DESTINATION 
+    lib/cmake/ios_std_alternatives
+)
+
+install(
+  DIRECTORY ${PROJECT_SOURCE_DIR}/include/
+  DESTINATION include
+)
+
 # ---- Tests ----
 
 if (ios_std_alternatives_TESTS_ENABLE_TESTS)
