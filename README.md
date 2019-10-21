@@ -10,7 +10,7 @@ This project adds alternative implementations to broken iOS types.
 ## Run tests
 
 ```bash
-cmake -H. -Bbuild -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+cmake -H. -Bbuild -Dios_std_alternatives_ENABLE_TESTS=On
 cmake --build build -j8
 ./build/tests/ios_std_alternatives_test
 ```
@@ -18,6 +18,6 @@ cmake --build build -j8
 ## Compile tests for iOS 9.0
 
 ```bash
-cmake -E env CXXFLAGS="-fno-aligned-allocation" cmake -H. -Bbuild-ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.0 -DCMAKE_INSTALL_PREFIX=./build-ios/root -DCMAKE_IOS_INSTALL_COMBINED=YES -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+cmake -E env CXXFLAGS="-fno-aligned-allocation" cmake -H. -Bbuild-ios -G Xcode -DCMAKE_SYSTEM_NAME=iOS -DCMAKE_OSX_DEPLOYMENT_TARGET=9.0 -DCMAKE_INSTALL_PREFIX=./build-ios/root -DCMAKE_IOS_INSTALL_COMBINED=YES -Dios_std_alternatives_ENABLE_TESTS=On
 cmake --build build-ios --target install -j8
 ```

@@ -6,7 +6,7 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
 # ---- Options ----
 
-option(ios_std_alternatives_TESTS_ENABLE_TESTS "Build tests" OFF)
+option(ios_std_alternatives_ENABLE_TESTS "Build tests" OFF)
 
 # ---- Project ----
 
@@ -29,6 +29,12 @@ CPMAddPackage(
 
 add_library(ios_std_alternatives INTERFACE)
 target_link_libraries(ios_std_alternatives INTERFACE mpark_variant)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  # remove constuctor warning
+  target_compile_definitions(ios_std_alternatives INTERFACE "-Wno-deprecated-copy")
+endif()
+
 
 target_include_directories(ios_std_alternatives
   INTERFACE 
@@ -82,6 +88,6 @@ install(
 
 # ---- Tests ----
 
-if (ios_std_alternatives_TESTS_ENABLE_TESTS)
+if (ios_std_alternatives_ENABLE_TESTS)
   add_subdirectory(tests)
 endif()

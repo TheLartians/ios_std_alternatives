@@ -24,6 +24,6 @@ jobs:
         
     - name: build and run tests
       run: |
-        cmake -Htests -Bbuild/tests -Dios_std_alternatives_TESTS_ENABLE_TESTS=On
+        cmake -Htests -Bbuild/tests -Dios_std_alternatives_ENABLE_TESTS=On
         cmake --build build/tests -j8
         ./build/tests/ios_std_alternatives_test
