@@ -32,7 +32,7 @@ target_link_libraries(ios_std_alternatives INTERFACE mpark_variant)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # remove constuctor warning
-  target_compile_definitions(ios_std_alternatives INTERFACE "-Wno-deprecated-copy")
+  target_compile_options(ios_std_alternatives INTERFACE "-Wno-deprecated-copy")
 endif()
 
 
